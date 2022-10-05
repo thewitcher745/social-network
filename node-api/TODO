@@ -1,2 +1,4 @@
-[ ] Fix the extremely messy validator/router situation
-[ ] Add repeated password check on updateUserValidator
+[ ] Add authorization for updating user info
+
+[X] Add repeated password check on updateUserValidator
+[X] Fix the extremely messy validator/router situation

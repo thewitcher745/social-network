@@ -9,18 +9,24 @@ const postValidator = (req, res, next) => {
   // Also apparently rules cannot be empty
 
   // Title check
-  rules.push(body("title", "Title is empty.").notEmpty());
   rules.push(
-    body("title", "Title must be proper length.").isLength({ min: 4, max: 150 })
+    body("title")
+      .notEmpty()
+      .withMessage("Title is empty.")
+      .isLength({ min: 4, max: 150 })
+      .withMessage("Title must be proper length.")
   );
 
   // Body check
-  rules.push(body("body", "Body is empty.").notEmpty());
   rules.push(
-    body("body", "Body must be proper length.").isLength({
-      min: 4,
-      max: 2000,
-    })
+    body("body")
+      .notEmpty()
+      .withMessage("Body is empty.")
+      .isLength({
+        min: 4,
+        max: 2000,
+      })
+      .withMessage("Body must be proper length.")
   );
 
   return rules;

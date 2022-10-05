@@ -5,7 +5,7 @@ const getAllUsers = (req, res) => {
 };
 
 const getUser = (req, res) => {
-  UserModel.findOne({ _id: req.params.id }).then((user) => res.json(user));
+  UserModel.findOne({ _id: req.params.id }).then((user) => res.json(user)); // params gets assigned to req when the router string containers a :id or similar
 };
 
 const updateUser = (req, res) => {
@@ -15,7 +15,6 @@ const updateUser = (req, res) => {
       updatedUser[property] = req.body[property];
     }
     updatedUser = new UserModel(updatedUser);
-    updatedUser.id = "800";
     await updatedUser.save().then((user) => res.json(user)); // This will not result in duplicates, as _id is unique across collection
   });
 };

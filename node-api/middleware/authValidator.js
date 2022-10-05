@@ -12,15 +12,21 @@ const signUpValidator = (req, res, next) => {
   rules.push(body("name", "Name cannot be empty.").notEmpty());
 
   // Email check
-  rules.push(body("email", "Email cannot be empty.").notEmpty());
-  rules.push(body("email", "Email format isn't valid.").isEmail());
+  rules.push(
+    body("email")
+      .notEmpty()
+      .withMessage("Email cannot be empty.")
+      .isEmail()
+      .withMessage("Email format isn't valid.")
+  );
 
   // Password check
   rules.push(
-    body("password", "Password must be at least 8 characters.")
+    body("password")
       .isLength({
         min: 8,
       })
+      .withMessage("Password must be at least 8 characters.")
       .matches(/\d/)
       .withMessage("Password must contain a number.")
   );
@@ -32,9 +38,15 @@ const signInValidator = (req, res, next) => {
   const rules = [];
 
   // Email check
-  rules.push(body("email", "Email cannot be empty.").notEmpty());
-  rules.push(body("email", "Email format isn't valid.").isEmail());
+  rules.push(
+    body("email")
+      .notEmpty()
+      .withMessage("Email cannot be empty.")
+      .isEmail()
+      .withMessage("Email format isn't valid.")
+  );
 
+  // Password check
   rules.push(body("password", "Password cannot be empty.").notEmpty());
 
   return rules;

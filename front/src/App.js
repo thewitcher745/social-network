@@ -30,7 +30,6 @@ function App() {
   }, []);
 
   const removePost = (_id) => {
-    console.log(`removing id ${_id}`);
     axios.post("http://127.0.0.1:3000/removePost", { _id: _id }).then(() => {
       axios.get("http://127.0.0.1:3000").then((response) => {
         setPosts(response.data.posts);
