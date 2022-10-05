@@ -22,7 +22,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"title\": \"This is the title.\",\r\n    \"body\": \"This is the body.\"\r\n}",
+					"raw": "{\r\n    \"title\": \"Title 1\",\r\n    \"body\": \"Body 1\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -38,6 +38,15 @@
 			"request": {
 				"method": "POST",
 				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"thewitcher745\",\r\n    \"email\": \"sample@gmail.com\",\r\n    \"password\": \"12345678\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
 				"url": "localhost:3000/signup"
 			},
 			"response": []
@@ -49,7 +58,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"email\": \"nigger@cunny.rape\",\r\n    \"password\": \"sex\"\r\n}",
+					"raw": "{\r\n    \"email\": \"sample@gmail.com\",\r\n    \"password\": \"12345678\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -106,7 +115,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"_id\": \"633df4a14ff5f012ca819a08\",\r\n    \"name\": \"thewitcher746\"\r\n}",
+					"raw": "{\r\n    \"_id\": \"633df4a14ff5f012ca819a08\",\r\n    \"name\": \"thewitcher745\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
