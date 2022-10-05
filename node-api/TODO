@@ -1,4 +1,5 @@
 [ ] Add authorization for updating user info
+[ ] Add error handling to all controllers
 
 [X] Add repeated password check on updateUserValidator
 [X] Fix the extremely messy validator/router situation

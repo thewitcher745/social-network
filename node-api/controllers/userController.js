@@ -19,4 +19,9 @@ const updateUser = (req, res) => {
   });
 };
 
-module.exports = { getAllUsers, getUser, updateUser };
+const deleteUser = (req, res) => {
+  console.log(req.body);
+  UserModel.deleteOne({ _id: req.body._id }).then((user) => res.json(user));
+};
+
+module.exports = { getAllUsers, getUser, updateUser, deleteUser };

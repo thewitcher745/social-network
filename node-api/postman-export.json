@@ -2,7 +2,7 @@
 	"info": {
 		"_postman_id": "31bc987c-199c-4e6a-8a1c-e84f73ea3fe7",
 		"name": "API testing",
-		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "15831678"
 	},
 	"item": [
@@ -11,7 +11,13 @@
 			"request": {
 				"method": "GET",
 				"header": [],
-				"url": "localhost:3000"
+				"url": {
+					"raw": "localhost:3000",
+					"host": [
+						"localhost"
+					],
+					"port": "3000"
+				}
 			},
 			"response": []
 		},
@@ -29,7 +35,16 @@
 						}
 					}
 				},
-				"url": "localhost:3000/post"
+				"url": {
+					"raw": "localhost:3000/post",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"post"
+					]
+				}
 			},
 			"response": []
 		},
@@ -47,7 +62,16 @@
 						}
 					}
 				},
-				"url": "localhost:3000/signup"
+				"url": {
+					"raw": "localhost:3000/signup",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"signup"
+					]
+				}
 			},
 			"response": []
 		},
@@ -65,7 +89,16 @@
 						}
 					}
 				},
-				"url": "localhost:3000/signin"
+				"url": {
+					"raw": "localhost:3000/signin",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"signin"
+					]
+				}
 			},
 			"response": []
 		},
@@ -74,7 +107,16 @@
 			"request": {
 				"method": "GET",
 				"header": [],
-				"url": "localhost:3000/signout"
+				"url": {
+					"raw": "localhost:3000/signout",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"signout"
+					]
+				}
 			},
 			"response": []
 		},
@@ -83,7 +125,16 @@
 			"request": {
 				"method": "GET",
 				"header": [],
-				"url": "localhost:3000/getAllUsers"
+				"url": {
+					"raw": "localhost:3000/getAllUsers",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"getAllUsers"
+					]
+				}
 			},
 			"response": []
 		},
@@ -104,7 +155,17 @@
 						}
 					}
 				},
-				"url": "localhost:3000/user/633de10fbbcd211db0feac1b"
+				"url": {
+					"raw": "localhost:3000/user/633de10fbbcd211db0feac1b",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"user",
+						"633de10fbbcd211db0feac1b"
+					]
+				}
 			},
 			"response": []
 		},
@@ -115,14 +176,50 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"_id\": \"633df4a14ff5f012ca819a08\",\r\n    \"name\": \"thewitcher745\"\r\n}",
+					"raw": "{\r\n    \"_id\": \"633e0aa0a6969f4f1e266167\",\r\n    \"name\": \"thewitcher745\",\r\n    \"password\": \"123456789\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
 						}
 					}
 				},
-				"url": "localhost:3000/updateUser"
+				"url": {
+					"raw": "localhost:3000/updateUser",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"updateUser"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete user",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"_id\": \"633e0aa0a6969f4f1e266167\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/deleteUser",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"deleteUser"
+					]
+				}
 			},
 			"response": []
 		}
