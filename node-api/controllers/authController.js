@@ -2,6 +2,8 @@ const UserModel = require("../models/UserModel");
 const jwt = require("jsonwebtoken");
 const dotenv = require("dotenv");
 
+dotenv.config();
+
 const signUp = async (req, res) => {
   const userExists = await UserModel.findOne({ email: req.body.email });
 
@@ -43,4 +45,5 @@ const signOut = (req, res) => {
   res.clearCookie("t");
   res.json({ message: "Signed out." });
 };
+
 module.exports = { signUp, signIn, signOut };

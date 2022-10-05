@@ -67,4 +67,6 @@ userSchema.methods = {
   },
 };
 
-module.exports = mongoose.model("User", userSchema);
+// Allows for importing the model in multiple places
+if (mongoose.models.User) module.exports = mongoose.model("User");
+else module.exports = mongoose.model("User", userSchema);

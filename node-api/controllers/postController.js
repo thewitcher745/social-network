@@ -1,5 +1,3 @@
-const { validationResult } = require("express-validator");
-
 const PostModel = require("../models/postModel");
 
 const getPosts = (req, res) => {
@@ -21,7 +19,7 @@ const createPost = (req, res) => {
 };
 
 const removePost = (req, res) => {
-  const posts = PostModel.deleteOne({ _id: req.body._id })
+  PostModel.deleteOne({ _id: req.body._id })
     .then((posts) => {
       res.status(200).json({ posts });
     })
