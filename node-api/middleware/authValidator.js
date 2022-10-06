@@ -1,4 +1,5 @@
 const { body } = require("express-validator");
+const { expressjwt: expressJwt } = require("express-jwt");
 
 // This file defines a function which has to be called to be used as a middleware, as in the
 // middleware version should have () at the end, as opposed to the rootValidator.
@@ -52,4 +53,10 @@ const signInValidator = (req, res, next) => {
   return rules;
 };
 
-module.exports = { signUpValidator, signInValidator };
+// Configures the authorization check as a middleware
+const requireSignIn = expressJwt({
+  secret: process.env.JWT_SECRET,
+  algorithms: ["HS256"],
+});
+
+module.exports = { signUpValidator, signInValidator, requireSignIn };

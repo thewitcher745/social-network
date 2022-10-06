@@ -35,7 +35,9 @@ const signIn = async (req, res) => {
     });
   }
   // Generate a token with secret and id
-  const token = jwt.sign({ _id: userExists._id }, process.env.JWT_SECRET);
+  const token = jwt.sign({ _id: userExists._id }, process.env.JWT_SECRET, {
+    algorithm: "HS256",
+  });
   res.cookie("t", token, { expire: new Date() + 9999 });
 
   res.json({ token, user: { userExists } });

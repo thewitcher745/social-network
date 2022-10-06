@@ -5,6 +5,7 @@ const { postValidator } = require("../middleware/postValidator");
 const {
   signInValidator,
   signUpValidator,
+  requireSignIn,
 } = require("../middleware/authvalidator");
 const { updateUserValidator } = require("../middleware/userValidator");
 const rootValidator = require("../middleware/rootValidator");
@@ -19,7 +20,7 @@ module.exports = function masterRouter(app) {
   app.post("/signin", signInValidator(), rootValidator, authRoutes);
   app.post("/signout", rootValidator, authRoutes);
 
-  app.get("/getAllUsers", rootValidator, userRoutes);
+  app.get("/getAllUsers", rootValidator, requireSignIn, userRoutes);
   app.get("/user/:id", rootValidator, userRoutes);
   app.post("/updateUser", updateUserValidator(), rootValidator, userRoutes);
   app.post("/deleteUser", rootValidator, userRoutes);

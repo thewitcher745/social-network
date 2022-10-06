@@ -20,7 +20,6 @@ const updateUser = (req, res) => {
 };
 
 const deleteUser = (req, res) => {
-  console.log(req.body);
   UserModel.deleteOne({ _id: req.body._id }).then((user) => res.json(user));
 };
 
