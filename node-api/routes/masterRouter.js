@@ -32,8 +32,22 @@ module.exports = function masterRouter(app) {
     rootValidator,
     userRoutes
   );
-  app.get("/user/:id", getUserValidator(), rootValidator, userRoutes);
-  app.post("/updateUser", updateUserValidator(), rootValidator, userRoutes);
+  app.get(
+    "/user/:id",
+    requireSignIn,
+    requireSignInError,
+    getUserValidator(),
+    rootValidator,
+    userRoutes
+  );
+  app.post(
+    "/updateUser",
+    requireSignIn,
+    requireSignInError,
+    updateUserValidator(),
+    rootValidator,
+    userRoutes
+  );
   app.post("/deleteUser", deleteUserValidator(), rootValidator, userRoutes);
 
   return app;

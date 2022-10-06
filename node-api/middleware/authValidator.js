@@ -54,8 +54,10 @@ const signInValidator = (req, res, next) => {
 };
 
 // Configures the authorization check as a middleware
+// If there is a token, appends an object called auth to the request which containes the _id
 const requireSignIn = expressJwt({
   secret: process.env.JWT_SECRET,
+  userProperty: "auth",
   algorithms: ["HS256"],
 });
 

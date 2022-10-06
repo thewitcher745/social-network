@@ -12,6 +12,7 @@ const getUser = (req, res) => {
 };
 
 const updateUser = (req, res) => {
+  console.log(req.auth);
   UserModel.findById(req.body._id).then(async (user) => {
     if (user) {
       let updatedUser = user;
@@ -25,9 +26,10 @@ const updateUser = (req, res) => {
 };
 
 const deleteUser = (req, res) => {
-  UserModel.findOneAndDelete({ _id: req.body._id }).then((user) =>
-    res.json(user)
-  );
+  UserModel.findOneAndDelete({ _id: req.body._id }).then((user) => {
+    if (user) res.json(user);
+    else res.status(404).json({ error: "User not found." });
+  });
 };
 
 module.exports = { getAllUsers, getUser, updateUser, deleteUser };
