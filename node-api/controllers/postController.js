@@ -1,7 +1,15 @@
 const PostModel = require("../models/postModel");
 
-const getPosts = (req, res) => {
-  PostModel.find({ _id: req.body._id })
+const getUserPosts = (req, res) => {
+  PostModel.find({ postedBy: req.params.id })
+    .then((posts) => {
+      res.json({ posts });
+    })
+    .catch((err) => console.log(err));
+};
+
+const getAllPosts = (req, res) => {
+  PostModel.find()
     .then((posts) => {
       res.json({ posts });
     })
@@ -9,7 +17,10 @@ const getPosts = (req, res) => {
 };
 
 const createPost = (req, res, next) => {
-  res.json(req.post);
+  const post = new PostModel(req.body);
+  post.save().then((post) => console.log(post));
+
+  res.json(req.body);
 };
 
 const removePost = (req, res) => {
@@ -20,4 +31,4 @@ const removePost = (req, res) => {
     .catch((err) => console.log(err));
 };
 
-module.exports = { getPosts, createPost, removePost };
+module.exports = { getUserPosts, getAllPosts, createPost, removePost };

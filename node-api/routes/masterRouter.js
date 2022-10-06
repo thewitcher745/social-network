@@ -6,10 +6,7 @@ const postRoutes = require("./postRoutes");
 const authRoutes = require("./authRoutes");
 const userRoutes = require("./userRoutes");
 const { createPostValidator } = require("../middleware/postValidator");
-const {
-  includeFormData,
-  excludeFormData,
-} = require("../middleware/formDataInclusion");
+const { includeFormData } = require("../middleware/formDataInclusion");
 const {
   signInValidator,
   signUpValidator,
@@ -26,7 +23,21 @@ const rootValidator = require("../middleware/rootValidator");
 // The root validator MUST be called as the very last one, so it will contain all the potential errors
 module.exports = function masterRouter(app) {
   // Post-related routes
-  app.get("/", rootValidator, postRoutes);
+  app.get(
+    "/userPosts/:id",
+    requireSignIn,
+    requireSignInError,
+    rootValidator,
+    postRoutes
+  );
+
+  app.get(
+    "/getAllPosts",
+    requireSignIn,
+    requireSignInError,
+    rootValidator,
+    postRoutes
+  );
 
   app.post(
     "/post",
@@ -66,6 +77,7 @@ module.exports = function masterRouter(app) {
     rootValidator,
     userRoutes
   );
+
   app.get(
     "/user/:id",
     requireSignIn,
@@ -74,6 +86,7 @@ module.exports = function masterRouter(app) {
     rootValidator,
     userRoutes
   );
+
   app.post(
     "/updateUser",
     requireSignIn,
@@ -82,6 +95,7 @@ module.exports = function masterRouter(app) {
     rootValidator,
     userRoutes
   );
+
   app.post(
     "/deleteUser",
     requireSignIn,
