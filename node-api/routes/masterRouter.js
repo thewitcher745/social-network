@@ -1,7 +1,15 @@
+const formidableMiddleware = require("express-formidable-v2");
+
+const postController = require("../controllers/postController");
+
 const postRoutes = require("./postRoutes");
 const authRoutes = require("./authRoutes");
 const userRoutes = require("./userRoutes");
-const { postValidator } = require("../middleware/postValidator");
+const { createPostValidator } = require("../middleware/postValidator");
+const {
+  includeFormData,
+  excludeFormData,
+} = require("../middleware/formDataInclusion");
 const {
   signInValidator,
   signUpValidator,
@@ -17,14 +25,48 @@ const rootValidator = require("../middleware/rootValidator");
 
 // The root validator MUST be called as the very last one, so it will contain all the potential errors
 module.exports = function masterRouter(app) {
+  // Post-related routes
   app.get("/", rootValidator, postRoutes);
-  app.post("/post", postValidator(), rootValidator, postRoutes);
-  app.post("/removePost", rootValidator, postRoutes);
+  // app.post(
+  //   "/post",
+  //   requireSignIn,
+  //   requireSignInError,
+  //   postValidator(),
+  //   rootValidator,
+  //   postRoutes
+  // );
 
-  app.post("/signup", signUpValidator(), rootValidator, authRoutes);
-  app.post("/signin", signInValidator(), rootValidator, authRoutes);
-  app.post("/signout", rootValidator, authRoutes);
+  app.post(
+    "/post",
+    formidableMiddleware(),
+    requireSignIn,
+    requireSignInError,
+    includeFormData,
+    createPostValidator,
+    rootValidator,
+    postRoutes
+  );
 
+  app.post(
+    "/removePost",
+    requireSignIn,
+    requireSignInError,
+    rootValidator,
+    postRoutes
+  );
+
+  // Authentication-related routes
+  app.post("/signup", signUpValidator, rootValidator, authRoutes);
+  app.post("/signin", signInValidator, rootValidator, authRoutes);
+  app.post(
+    "/signout",
+    requireSignIn,
+    requireSignInError,
+    rootValidator,
+    authRoutes
+  );
+
+  // User-related routes
   app.get(
     "/getAllUsers",
     requireSignIn,
@@ -36,7 +78,7 @@ module.exports = function masterRouter(app) {
     "/user/:id",
     requireSignIn,
     requireSignInError,
-    getUserValidator(),
+    getUserValidator,
     rootValidator,
     userRoutes
   );
@@ -44,11 +86,18 @@ module.exports = function masterRouter(app) {
     "/updateUser",
     requireSignIn,
     requireSignInError,
-    updateUserValidator(),
+    updateUserValidator,
     rootValidator,
     userRoutes
   );
-  app.post("/deleteUser", deleteUserValidator(), rootValidator, userRoutes);
+  app.post(
+    "/deleteUser",
+    requireSignIn,
+    requireSignInError,
+    deleteUserValidator,
+    rootValidator,
+    userRoutes
+  );
 
   return app;
 };

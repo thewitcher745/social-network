@@ -8,14 +8,8 @@ const getPosts = (req, res) => {
     .catch((err) => console.log(err));
 };
 
-const createPost = (req, res) => {
-  const post = new PostModel(req.body);
-
-  post.save().then((result) => {
-    res.json({
-      post: result,
-    });
-  });
+const createPost = (req, res, next) => {
+  res.json(req.post);
 };
 
 const removePost = (req, res) => {

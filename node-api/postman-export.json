@@ -24,11 +24,21 @@
 		{
 			"name": "Create post",
 			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MzNlYTkzZDIxYzc5MjMzZGRjNDQ1MDciLCJpYXQiOjE2NjUwNTA5NTF9.54hHKRs4RdwzqY3sUI64xv3lCTTqUwihDp0Ecrm8iYk",
+							"type": "string"
+						}
+					]
+				},
 				"method": "POST",
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"title\": \"Title 1\",\r\n    \"body\": \"Body 1\"\r\n}",
+					"raw": "{\r\n    \"title\": \"Title 1\",\r\n    \"body\": \"Body\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"

@@ -12,7 +12,6 @@ const getUser = (req, res) => {
 };
 
 const updateUser = (req, res) => {
-  console.log(req.auth);
   UserModel.findById(req.body._id).then(async (user) => {
     if (user) {
       let updatedUser = user;
