@@ -27,14 +27,6 @@ const rootValidator = require("../middleware/rootValidator");
 module.exports = function masterRouter(app) {
   // Post-related routes
   app.get("/", rootValidator, postRoutes);
-  // app.post(
-  //   "/post",
-  //   requireSignIn,
-  //   requireSignInError,
-  //   postValidator(),
-  //   rootValidator,
-  //   postRoutes
-  // );
 
   app.post(
     "/post",

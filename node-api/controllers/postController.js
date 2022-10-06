@@ -1,7 +1,7 @@
 const PostModel = require("../models/postModel");
 
 const getPosts = (req, res) => {
-  PostModel.find()
+  PostModel.find({ _id: req.body._id })
     .then((posts) => {
       res.json({ posts });
     })

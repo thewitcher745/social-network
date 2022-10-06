@@ -21,8 +21,7 @@ mongoose.connection.on("error", (err) => console.error(err));
 // Middleware
 app.use(cors());
 app.use(morgan("dev"));
-// app.use(bodyParser.json());
-
+app.use(bodyParser.json());
 app.use(cookieParser());
 
 // Routes
