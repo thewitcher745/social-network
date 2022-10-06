@@ -1,5 +1,5 @@
 const UserModel = require("../models/UserModel");
-const { body, oneOf } = require("express-validator");
+const { body, param } = require("express-validator");
 
 // Note the relatively specific format of the asynchronous validator
 // The FIND object must be returned, which takes a function itself and returns a Promise.reject() object
@@ -13,6 +13,13 @@ const repetitivePasswordCheck = (password, { req }) => {
 
 const updateUserValidator = (req, res, next) => {
   const rules = [];
+
+  // Id check
+  rules.push(
+    body("_id")
+      .isLength({ min: 24, max: 24 })
+      .withMessage("Request ID has invalid length.")
+  );
 
   // Name check
   rules.push(
@@ -46,4 +53,30 @@ const updateUserValidator = (req, res, next) => {
   return rules;
 };
 
-module.exports = { updateUserValidator };
+const getUserValidator = (req, res, next) => {
+  const rules = [];
+
+  // Id check
+  rules.push(
+    param("id")
+      .isLength({ min: 24, max: 24 })
+      .withMessage("Request ID has invalid length.")
+  );
+
+  return rules;
+};
+
+const deleteUserValidator = (req, res, next) => {
+  const rules = [];
+
+  // Id check
+  rules.push(
+    body("_id")
+      .isLength({ min: 24, max: 24 })
+      .withMessage("Request ID has invalid length.")
+  );
+
+  return rules;
+};
+
+module.exports = { updateUserValidator, getUserValidator, deleteUserValidator };

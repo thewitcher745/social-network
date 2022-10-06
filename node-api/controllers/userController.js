@@ -5,22 +5,29 @@ const getAllUsers = (req, res) => {
 };
 
 const getUser = (req, res) => {
-  UserModel.findOne({ _id: req.params.id }).then((user) => res.json(user)); // params gets assigned to req when the router string containers a :id or similar
+  UserModel.findById(req.params.id).then((user) => {
+    if (user) res.json(user);
+    else res.status(404).json({ error: "User not found." });
+  }); // params gets assigned to req when the router string containers a :id or similar
 };
 
 const updateUser = (req, res) => {
-  UserModel.findOne({ _id: req.body._id }).then(async (user) => {
-    let updatedUser = user;
-    for (property in req.body) {
-      updatedUser[property] = req.body[property];
-    }
-    updatedUser = new UserModel(updatedUser);
-    await updatedUser.save().then((user) => res.json(user)); // This will not result in duplicates, as _id is unique across collection
+  UserModel.findById(req.body._id).then(async (user) => {
+    if (user) {
+      let updatedUser = user;
+      for (property in req.body) {
+        updatedUser[property] = req.body[property];
+      }
+      updatedUser = new UserModel(updatedUser);
+      await updatedUser.save().then((user) => res.json(user)); // This will not result in duplicates, as _id is unique across collection
+    } else res.status(404).json({ error: "User not found." });
   });
 };
 
 const deleteUser = (req, res) => {
-  UserModel.deleteOne({ _id: req.body._id }).then((user) => res.json(user));
+  UserModel.findOneAndDelete({ _id: req.body._id }).then((user) =>
+    res.json(user)
+  );
 };
 
 module.exports = { getAllUsers, getUser, updateUser, deleteUser };

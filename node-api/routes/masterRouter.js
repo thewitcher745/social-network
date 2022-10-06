@@ -6,8 +6,13 @@ const {
   signInValidator,
   signUpValidator,
   requireSignIn,
+  requireSignInError,
 } = require("../middleware/authvalidator");
-const { updateUserValidator } = require("../middleware/userValidator");
+const {
+  updateUserValidator,
+  getUserValidator,
+  deleteUserValidator,
+} = require("../middleware/userValidator");
 const rootValidator = require("../middleware/rootValidator");
 
 // The root validator MUST be called as the very last one, so it will contain all the potential errors
@@ -20,10 +25,16 @@ module.exports = function masterRouter(app) {
   app.post("/signin", signInValidator(), rootValidator, authRoutes);
   app.post("/signout", rootValidator, authRoutes);
 
-  app.get("/getAllUsers", rootValidator, requireSignIn, userRoutes);
-  app.get("/user/:id", rootValidator, userRoutes);
+  app.get(
+    "/getAllUsers",
+    requireSignIn,
+    requireSignInError,
+    rootValidator,
+    userRoutes
+  );
+  app.get("/user/:id", getUserValidator(), rootValidator, userRoutes);
   app.post("/updateUser", updateUserValidator(), rootValidator, userRoutes);
-  app.post("/deleteUser", rootValidator, userRoutes);
+  app.post("/deleteUser", deleteUserValidator(), rootValidator, userRoutes);
 
   return app;
 };
