@@ -1,12 +1,12 @@
 const PostModel = require("../models/postModel");
 
 const getUserPosts = (req, res) => {
-  PostModel.find({ postedBy: req.params.id })
+  PostModel.find({ postedBy: req.params.userId })
     .sort("createdAt")
     .then((posts) => {
       res.json({ posts });
     })
-    .catch((err) => res.status(400).json({ error: error }));
+    .catch((err) => res.status(400).json({ error: err }));
 };
 
 const getAllPosts = (req, res) => {
@@ -15,7 +15,11 @@ const getAllPosts = (req, res) => {
     .then((posts) => {
       res.json({ posts });
     })
-    .catch((err) => res.status(400).json({ error: error }));
+    .catch((err) => res.status(400).json({ error: err }));
+};
+
+const getPostById = (req, res) => {
+  PostModel.findById(req.params.postId).then((post) => res.json({ post }));
 };
 
 const createPost = (req, res, next) => {
@@ -23,7 +27,7 @@ const createPost = (req, res, next) => {
   post
     .save()
     .then((post) => res.json(post))
-    .catch((err) => res.status(400).json({ error: error }));
+    .catch((err) => res.status(400).json({ error: err }));
 };
 
 const removePost = (req, res) => {
@@ -31,7 +35,13 @@ const removePost = (req, res) => {
     .then((post) => {
       res.status(200).json({ post });
     })
-    .catch((err) => res.status(400).json({ error: error }));
+    .catch((err) => res.status(400).json({ error: err }));
 };
 
-module.exports = { getUserPosts, getAllPosts, createPost, removePost };
+module.exports = {
+  getUserPosts,
+  getAllPosts,
+  getPostById,
+  createPost,
+  removePost,
+};

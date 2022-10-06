@@ -5,7 +5,7 @@ const getAllUsers = (req, res) => {
 };
 
 const getUser = (req, res) => {
-  UserModel.findById(req.params.id).then((user) => {
+  UserModel.findById(req.params.userId).then((user) => {
     if (user) res.json(user);
     else res.status(404).json({ error: "User not found." });
   }); // params gets assigned to req when the router string containers a :id or similar
