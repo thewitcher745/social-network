@@ -50,7 +50,7 @@ module.exports = function masterRouter(app) {
     postRoutes
   );
 
-  app.post(
+  app.delete(
     "/removePost",
     requireSignIn,
     requireSignInError,
@@ -96,7 +96,7 @@ module.exports = function masterRouter(app) {
     userRoutes
   );
 
-  app.post(
+  app.delete(
     "/deleteUser",
     requireSignIn,
     requireSignInError,
