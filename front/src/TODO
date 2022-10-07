@@ -1,0 +1,6 @@
+[ ] Add letter avatars if photo isn't present
+[ ] Add post creation date for posts
+[ ] Implement themes
+[ ] implement classes.class and css-in-js for styling
+[ ] Remove unnecessary userById call while fetching posts
+[ ] Add localization customization for date display

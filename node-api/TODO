@@ -2,6 +2,7 @@
 [ ] Consider making updateUser and deleteUser id work with params instead of body
 [ ] Add admin authorization for seeing all users
 [ ] Add validator to check if user invoking deleteUser and deletePost actually is the user
+[ ] Add poster data to PostModel
 
 [X] Add repeated password check on updateUserValidator
 [X] Fix the extremely messy validator/router situation
